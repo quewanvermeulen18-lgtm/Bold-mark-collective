@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bold Mark Collective — Where Bold Brands Are Born</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold-design: #C49332;
+            --gold-bmc: #B89D67;
+            --black: #000000;
+            --white: #FFFFFF;
+            --dark-bg: #000000;
+            --light-bg: #FFFFFF;
+            --cream: #f5f2ed;
+            --gold-muted: #c9a96e;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: var(--dark-bg);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            transition: all 0.5s ease;
+        }
+        
+        .nav.scrolled {
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 1rem 3rem;
+        }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+        
+        .nav-logo-icon {
+            width: 36px;
+            height: 36px;
+        }
+        
+        .nav-logo-icon svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .nav-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: #FFFFFF;
+            letter-spacing: 3px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.85rem;
+            color: #FFFFFF;
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+            color: #C49332;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #000000;
+            position: relative;
+            padding: 6rem 2rem 4rem;
+        }
+        
+        .hero-content {
+            text-align: center;
+            max-width: 700px;
+        }
+        
+        .hero-logo {
+            width: 220px;
+            height: 220px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .hero-logo svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 400;
+            color: #FFFFFF;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+        
+        .hero-subtitle {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            color: #FFFFFF;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-tagline {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(0.85rem, 1.3vw, 1.1rem);
+            color: #C49332;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-style: italic;
+        }
+        
+        /* Section Base */
+        .section {
+            padding: 5rem 2rem;
+            position: relative;
+        }
+        
+        .section-light {
+            background: #FFFFFF;
+            color: #000000;
+        }
+        
+        .section-cream {
+            background: #f5f2ed;
+            color: #000000;
+        }
+        
+        .section-dark {
+            background: #000000;
+            color: #FFFFFF;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .section-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #C49332;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+            font-weight: 400;
+            line-height: 1.2;
+            color: inherit;
+        }
+        
+        .gold-line {
+            width: 50px;
+            height: 1px;
+            background: #C49332;
+            margin: 1.5rem auto;
+        }
+        
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #333333;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.2rem;
+        }
+        
+        .about-visual {
+            display: flex;
+            justify-content: center;
+        }
+        
+        .about-logo-white {
+            width: 280px;
+            height: 280px;
+        }
+        
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(196, 147, 50, 0.2);
+            padding: 2rem 1.8rem;
+            transition: all 0.4s ease;
+        }
+        
+        .service-card:hover {
+            border-color: rgba(196, 147, 50, 0.5);
+            transform: translateY(-5px);
+        }
+        
+        .service-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #C49332;
+            opacity: 0.4;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .service-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #FFFFFF;
+            margin-bottom: 0.6rem;
+            line-height: 1.3;
+        }
+        
+        .service-desc {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            color: #aaaaaa;
+            line-height: 1.6;
+        }
+        
+        /* Mission/Vision */
+        .mv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .mv-card {
+            padding: 2.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            background: #FFFFFF;
+        }
+        
+        .mv-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #1a1a1a;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        .mv-card p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #555555;
+        }
+        
+        /* Target Market - FIXED */
+        .market-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .market-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem 1.5rem;
+            border: 1px solid rgba(196, 147, 50, 0.25);
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .market-item span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: #FFFFFF;
+        }
+        
+        .market-dot {
+            width: 8px;
+            height: 8px;
+            background: #C49332;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        /* Why Choose Us / Strengths - FIXED FOR BOTH THEMES */
+        .why-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .why-item {
+            padding: 1.5rem;
+            border-left: 2px solid #C49332;
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .why-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: #FFFFFF;
+            margin-bottom: 0.4rem;
+        }
+        
+        .why-item p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+            color: #bbbbbb;
+            line-height: 1.5;
+        }
+        
+        /* LIGHT SECTION OVERRIDES - CRITICAL FIX */
+        .section-light .why-item,
+        .section-cream .why-item {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        
+        .section-light .why-item h4,
+        .section-cream .why-item h4 {
+            color: #1a1a1a;
+        }
+        
+        .section-light .why-item p,
+        .section-cream .why-item p {
+            color: #555555;
+        }
+        
+        /* Approach Section - FIXED */
+        .approach-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .approach-content p {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            line-height: 1.7;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+        }
+        
+        .approach-content p:last-child {
+            color: #aaaaaa;
+            font-size: 1.05rem;
+        }
+        
+        /* Contact */
+        .contact-section {
+            text-align: center;
+            padding: 5rem 2rem;
+            background: #000000;
+        }
+        
+        .contact-logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 2rem;
+        }
+        
+        .contact-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            color: #FFFFFF;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            max-width: 400px;
+            margin: 0 auto 2rem;
+        }
+        
+        .contact-info a,
+        .contact-info span {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: #C49332;
+            text-decoration: none;
+        }
+        
+        .contact-info a:hover {
+            color: #FFFFFF;
+        }
+        
+        .contact-tagline {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.6rem;
+            color: #B89D67;
+        }
+        
+        /* Footer */
+        .footer {
+            padding: 2rem;
+            border-top: 1px solid rgba(196, 147, 50, 0.1);
+            text-align: center;
+            background: #000000;
+        }
+        
+        .footer-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.8rem;
+            color: #888888;
+            letter-spacing: 2px;
+        }
+        
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .about-grid,
+            .mv-grid,
+            .services-grid,
+            .market-list,
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+            .section {
+                padding: 3rem 1.5rem;
+            }
+            .hero-logo {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <a href="#" class="nav-logo">
+            <div class="nav-logo-icon">
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="50" cy="50" r="45" stroke="#C49332" stroke-width="0.5" opacity="0.3"/>
+                    <circle cx="50" cy="50" r="35" stroke="#C49332" stroke-width="0.5" opacity="0.5"/>
+                    <path d="M50 20 L50 15" stroke="#C49332" stroke-width="1"/>
+                    <path d="M50 80 L50 85" stroke="#C49332" stroke-width="1"/>
+                    <path d="M20 50 L15 50" stroke="#C49332" stroke-width="1"/>
+                    <path d="M80 50 L85 50" stroke="#C49332" stroke-width="1"/>
+                    <text x="50" y="54" text-anchor="middle" fill="#B89D67" font-family="serif" font-size="16" font-weight="600">BMC</text>
+                </svg>
+            </div>
+            <span class="nav-logo-text">Bold Mark</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Hero -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-logo">
+                <!-- BLACK BACKGROUND LOGO -->
+                <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="200" cy="200" r="180" stroke="#C49332" stroke-width="1" opacity="0.3"/>
+                    <circle cx="200" cy="200" r="170" stroke="#C49332" stroke-width="0.5" opacity="0.2" stroke-dasharray="4 4"/>
+                    <path d="M170 80 L180 60 L190 75 L200 50 L210 75 L220 60 L230 80 L225 95 L175 95 Z" fill="#C49332" opacity="0.9"/>
+                    <circle cx="200" cy="55" r="3" fill="#B89D67"/>
+                    <circle cx="180" cy="65" r="2" fill="#B89D67"/>
+                    <circle cx="220" cy="65" r="2" fill="#B89D67"/>
+                    <circle cx="200" cy="205" r="120" stroke="#C49332" stroke-width="2"/>
+                    <circle cx="200" cy="205" r="115" stroke="#C49332" stroke-width="0.5" opacity="0.5"/>
+                    <circle cx="200" cy="85" r="4" fill="#C49332"/>
+                    <circle cx="200" cy="325" r="4" fill="#C49332"/>
+                    <circle cx="80" cy="205" r="4" fill="#C49332"/>
+                    <circle cx="320" cy="205" r="4" fill="#C49332"/>
+                    <path d="M80 205 Q60 180 70 160 Q80 140 100 145" stroke="#C49332" stroke-width="1.5" fill="none"/>
+                    <path d="M320 205 Q340 180 330 160 Q320 140 300 145" stroke="#C49332" stroke-width="1.5" fill="none"/>
+                    <path d="M80 205 Q60 230 70 250 Q80 270 100 265" stroke="#C49332" stroke-width="1.5" fill="none"/>
+                    <path d="M320 205 Q340 230 330 250 Q320 270 300 265" stroke="#C49332" stroke-width="1.5" fill="none"/>
+                    <path d="M100 145 Q90 130 105 125 Q115 135 100 145" fill="#C49332" opacity="0.6"/>
+                    <path d="M300 145 Q310 130 295 125 Q285 135 300 145" fill="#C49332" opacity="0.6"/>
+                    <path d="M100 265 Q90 280 105 285 Q115 275 100 265" fill="#C49332" opacity="0.6"/>
+                    <path d="M300 265 Q310 280 295 285 Q285 275 300 265" fill="#C49332" opacity="0.6"/>
+                    <path d="M150 300 Q200 340 250 300 Q230 320 200 335 Q170 320 150 300" fill="#C49332" opacity="0.7"/>
+                    <text x="200" y="218" text-anchor="middle" fill="#B89D67" font-family="'Playfair Display', serif" font-size="52" font-weight="600" letter-spacing="4">BMC</text>
+                </svg>
+            </div>
+            <h1 class="hero-title">Bold Mark Collective</h1>
+            <p class="hero-subtitle">Collective</p>
+            <p class="hero-tagline">— Where Bold Brands Are Born —</p>
+        </div>
+    </section>
+    
+    <!-- About -->
+    <section class="section section-cream" id="about">
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <span class="section-label">01 — Company Overview</span>
+                <h2 class="section-title" style="text-align:left; margin-bottom:1rem;">Crafting Bold<br>Impressions</h2>
+                <div class="gold-line" style="margin:1rem 0;"></div>
+                <p>Bold Mark Collective is a dynamic company dedicated to helping businesses create impactful and lasting impressions. Built on extensive industry experience, we understand production, execution, and client expectations.</p>
+                <p>We deliver premium corporate gifts, promotional products, and identity solutions that elevate brand presence across South Africa and beyond.</p>
+            </div>
+            <div class="about-visual reveal">
+                <!-- WHITE BACKGROUND LOGO -->
+                <div class="about-logo-white">
+                    <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="0" width="400" height="400" fill="#FFFFFF" rx="15"/>
+                        <circle cx="200" cy="200" r="170" stroke="#C49332" stroke-width="1" opacity="0.4"/>
+                        <circle cx="200" cy="200" r="160" stroke="#C49332" stroke-width="0.5" opacity="0.2" stroke-dasharray="4 4"/>
+                        <path d="M170 75 L180 55 L190 70 L200 45 L210 70 L220 55 L230 75 L225 90 L175 90 Z" fill="#C49332" opacity="0.9"/>
+                        <circle cx="200" cy="50" r="3" fill="#B89D67"/>
+                        <circle cx="180" cy="60" r="2" fill="#B89D67"/>
+                        <circle cx="220" cy="60" r="2" fill="#B89D67"/>
+                        <circle cx="200" cy="200" r="110" stroke="#C49332" stroke-width="2"/>
+                        <circle cx="200" cy="200" r="105" stroke="#C49332" stroke-width="0.5" opacity="0.5"/>
+                        <circle cx="200" cy="90" r="4" fill="#C49332"/>
+                        <circle cx="200" cy="310" r="4" fill="#C49332"/>
+                        <circle cx="90" cy="200" r="4" fill="#C49332"/>
+                        <circle cx="310" cy="200" r="4" fill="#C49332"/>
+                        <path d="M90 200 Q70 175 80 155 Q90 135 110 140" stroke="#C49332" stroke-width="1.5" fill="none"/>
+                        <path d="M310 200 Q330 175 320 155 Q310 135 290 140" stroke="#C49332" stroke-width="1.5" fill="none"/>
+                        <path d="M90 200 Q70 225 80 245 Q90 265 110 260" stroke="#C49332" stroke-width="1.5" fill="none"/>
+                        <path d="M310 200 Q330 225 320 245 Q310 265 290 260" stroke="#C49332" stroke-width="1.5" fill="none"/>
+                        <path d="M110 140 Q100 125 115 120 Q125 130 110 140" fill="#C49332" opacity="0.6"/>
+                        <path d="M290 140 Q300 125 285 120 Q275 130 290 140" fill="#C49332" opacity="0.6"/>
+                        <path d="M110 260 Q100 275 115 280 Q125 270 110 260" fill="#C49332" opacity="0.6"/>
+                        <path d="M290 260 Q300 275 285 280 Q275 270 290 260" fill="#C49332" opacity="0.6"/>
+                        <path d="M160 295 Q200 335 240 295 Q220 315 200 330 Q180 315 160 295" fill="#C49332" opacity="0.7"/>
+                        <text x="200" y="213" text-anchor="middle" fill="#B89D67" font-family="'Playfair Display', serif" font-size="48" font-weight="600" letter-spacing="4">BMC</text>
+                        <text x="200" y="355" text-anchor="middle" fill="#000000" font-family="'Playfair Display', serif" font-size="22" font-weight="500" letter-spacing="3">Bold Mark</text>
+                        <text x="200" y="375" text-anchor="middle" fill="#000000" font-family="'Great Vibes', cursive" font-size="20" letter-spacing="1">Collective</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Services -->
+    <section class="section section-dark" id="services">
+        <div class="section-header reveal">
+            <span class="section-label">02 — What We Do</span>
+            <h2 class="section-title">Our Services</h2>
+            <div class="gold-line"></div>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <span class="service-number">01</span>
+                <h3 class="service-title">Corporate Gifts & Promotional Products</h3>
+                <p class="service-desc">Premium branded merchandise that leaves a lasting impression on clients and partners.</p>
+            </div>
+            <div class="service-card reveal">
+                <span class="service-number">02</span>
+                <h3 class="service-title">Branded Apparel & Workwear</h3>
+                <p class="service-desc">Professional clothing solutions that unify your team and amplify your brand identity.</p>
+            </div>
+            <div class="service-card reveal">
+                <span class="service-number">03</span>
+                <h3 class="service-title">Printing Solutions</h3>
+                <p class="service-desc">Digital, Large Format, and Litho printing for all your marketing and operational needs.</p>
+            </div>
+            <div class="service-card reveal">
+                <span class="service-number">04</span>
+                <h3 class="service-title">Corporate Identity Development</h3>
+                <p class="service-desc">Strategic brand identity systems that communicate your unique value proposition.</p>
+            </div>
+            <div class="service-card reveal">
+                <span class="service-number">05</span>
+                <h3 class="service-title">Event Branding & Materials</h3>
+                <p class="service-desc">Comprehensive event collateral that transforms occasions into memorable brand experiences.</p>
+            </div>
+            <div class="service-card reveal">
+                <span class="service-number">06</span>
+                <h3 class="service-title">Custom Branded Merchandise</h3>
+                <p class="service-desc">Bespoke merchandise solutions tailored to your specific campaign and audience needs.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Mission & Vision -->
+    <section class="section section-light" id="mission">
+        <div class="section-header reveal">
+            <span class="section-label">03 — Our Purpose</span>
+            <h2 class="section-title">Mission & Vision</h2>
+            <div class="gold-line"></div>
+        </div>
+        <div class="mv-grid">
+            <div class="mv-card reveal">
+                <span class="section-label">Mission</span>
+                <h3>To Leave a Lasting Mark</h3>
+                <p>To provide innovative, reliable, and high-quality solutions that help businesses stand out and leave a lasting mark. We believe every brand deserves to be remembered.</p>
+            </div>
+            <div class="mv-card reveal">
+                <span class="section-label">Vision</span>
+                <h3>A Trusted Partner Across South Africa</h3>
+                <p>To become a trusted and preferred partner across South Africa through excellence, creativity, and value. We aim to set the standard for brand elevation.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Target Market -->
+    <section class="section section-dark">
+        <div class="section-header reveal">
+            <span class="section-label">04 — Who We Serve</span>
+            <h2 class="section-title">Target Market</h2>
+            <div class="gold-line"></div>
+        </div>
+        <div class="market-list">
+            <div class="market-item reveal">
+                <div class="market-dot"></div>
+                <span>Corporate Companies</span>
+            </div>
+            <div class="market-item reveal">
+                <div class="market-dot"></div>
+                <span>SMEs</span>
+            </div>
+            <div class="market-item reveal">
+                <div class="market-dot"></div>
+                <span>Event Planners & Agencies</span>
+            </div>
+            <div class="market-item reveal">
+                <div class="market-dot"></div>
+                <span>Schools & Institutions</span>
+            </div>
+            <div class="market-item reveal">
+                <div class="market-dot"></div>
+                <span>Hospitality Industry</span>
+            </div>
+            <div class="market-item reveal">
+                <div class="market-dot"></div>
+                <span>Motor & Real Estate Industry</span>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Why Choose Us -->
+    <section class="section section-cream">
+        <div class="section-header reveal">
+            <span class="section-label">05 — Our Edge</span>
+            <h2 class="section-title">Why Choose Us</h2>
+            <div class="gold-line"></div>
+        </div>
+        <div class="why-grid">
+            <div class="why-item reveal">
+                <h4>Professional & Service-Driven</h4>
+                <p>We put your needs first, delivering with professionalism and a genuine commitment to your success.</p>
+            </div>
+            <div class="why-item reveal">
+                <h4>Competitive Pricing</h4>
+                <p>Quality solutions at prices that respect your budget without ever compromising on excellence.</p>
+            </div>
+            <div class="why-item reveal">
+                <h4>Strong Supplier Relationships</h4>
+                <p>Our network of trusted partners ensures reliable delivery and access to the best products.</p>
+            </div>
+            <div class="why-item reveal">
+                <h4>Passion for Execution</h4>
+                <p>We love what we do, and that passion translates into meticulous attention to every detail.</p>
+            </div>
+            <div class="why-item reveal">
+                <h4>Long-Term Partnerships</h4>
+                <p>We build relationships that last, growing alongside your brand through every milestone.</p>
+            </div>
+            <div class="why-item reveal">
+                <h4>Reliable Turnaround Times</h4>
+                <p>We respect your deadlines and consistently deliver on time, every time.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Approach -->
+    <section class="section section-dark">
+        <div class="section-header reveal">
+            <span class="section-label">06 — How We Work</span>
+            <h2 class="section-title">Our Approach</h2>
+            <div class="gold-line"></div>
+        </div>
+        <div class="approach-content reveal">
+            <p>We believe a brand is more than a logo — it's an experience.</p>
+            <p>We work closely with clients to deliver visually strong and strategically effective solutions. Every project is a collaboration, every detail is intentional, and every outcome is designed to make your brand unforgettable.</p>
+        </div>
+    </section>
+    
+    <!-- Strengths -->
+    <section class="section section-light">
+        <div class="section-header reveal">
+            <span class="section-label">07 — Core Strengths</span>
+            <h2 class="section-title">Our Strengths</h2>
+            <div class="gold-line"></div>
+        </div>
+        <div class="why-grid">
+            <div class="why-item reveal">
+                <h4>Extensive Industry Experience</h4>
+                <p>Years of expertise across diverse sectors inform every decision we make.</p>
+            </div>
+            <div class="why-item reveal">
+                <h4>Quality-Driven Approach</h4>
+                <p>Excellence isn't an option — it's our standard for every project.</p>
+            </div>
+            <div class="why-item reveal">
+                <h4>Client-Focused Service</h4>
+                <p>Your goals become our mission. We listen, adapt, and deliver beyond expectations.</p>
+            </div>
+            <div class="why-item reveal">
+                <h4>Attention to Detail</h4>
+                <p>From concept to completion, every element is crafted with precision and care.</p>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
+        <div class="contact-logo reveal">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="90" stroke="#C49332" stroke-width="0.5" opacity="0.3"/>
+                <circle cx="100" cy="100" r="80" stroke="#C49332" stroke-width="1" opacity="0.5"/>
+                <path d="M85 40 L90 30 L95 38 L100 25 L105 38 L110 30 L115 40" stroke="#C49332" stroke-width="1" fill="none"/>
+                <text x="100" y="108" text-anchor="middle" fill="#B89D67" font-family="serif" font-size="28" font-weight="600">BMC</text>
+            </svg>
+        </div>
+        <h2 class="contact-title reveal">Let's Create Something Bold</h2>
+        <div class="contact-info reveal">
+            <span style="font-family:'Playfair Display',serif; font-size:1.2rem; color:#FFFFFF; margin-bottom:0.3rem;">Bold Mark Collective</span>
+            <span>South Africa</span>
+            <a href="mailto:boldmarkcollective@gmail.com">boldmarkcollective@gmail.com</a>
+            <a href="tel:+27769726038">+27 76 972 6038</a>
+        </div>
+        <p class="contact-tagline reveal">— Where Bold Brands Are Born —</p>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <span class="footer-text">© 2026 Bold Mark Collective — All Rights Reserved</span>
+    </footer>
+    
+    <script>
+        // Nav scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+        
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', e => {
+                e.preventDefault();
+                document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
