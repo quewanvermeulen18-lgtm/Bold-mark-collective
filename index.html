@@ -998,63 +998,99 @@
         .footer-col ul li a:hover { color: var(--gold); }
 
         .footer-bottom {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            max-width: 1300px;
-            margin: 0 auto;
             text-align: center;
-            font-size: 0.78rem;
-            color: var(--text-dim);
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
         }
 
+        .footer-bottom p {
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .footer-bottom a {
+            color: var(--gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom a:hover { color: var(--gold-light); }
+
+        /* ── ANIMATIONS ── */
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes heroLogoIn {
-            from { opacity: 0; scale: 0.8; }
-            to { opacity: 1; scale: 1; }
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         @keyframes scrollPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
+            0%, 100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 1;
+            }
         }
 
         @keyframes marquee {
-            from { transform: translateX(0); }
-            to { transform: translateX(-50%); }
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
         }
 
         @keyframes breathe {
-            0%, 100% { filter: drop-shadow(0 0 60px rgba(201,169,98,0.2)) scale(1); }
-            50% { filter: drop-shadow(0 0 80px rgba(201,169,98,0.35)) scale(1.02); }
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .products-grid { grid-template-columns: repeat(3, 1fr); }
+            .header-content, .about-grid { grid-template-columns: 1fr; gap: 2rem; }
         }
 
         @media (max-width: 768px) {
             nav { padding: 0 3%; }
-            .nav-links { gap: 1rem; font-size: 0.65rem; }
-            .header-content, .highlights-content, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .nav-links { gap: 1.5rem; display: none; }
+            nav.scrolled { height: 56px; }
+            .hero { padding: 60px 3% 0; }
             .services-grid { grid-template-columns: 1fr; }
             .products-grid { grid-template-columns: repeat(2, 1fr); }
             .footer-top { grid-template-columns: 1fr; gap: 2rem; }
-            .form-row { grid-template-columns: 1fr; }
-            .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+            .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
         }
     </style>
 </head>
 <body>
-    <!-- NAV -->
+
+    <!-- ── NAVIGATION ── -->
     <nav>
-        <a href="#" class="nav-logo">
-            <svg class="nav-logo-icon" width="46" height="46" viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="23" cy="23" r="22.5" stroke="#c9a962" stroke-width="0.5" opacity="0.5"/>
-                <g opacity="0.9">
-                    <text x="23" y="26" font-family="Playfair Display, serif" font-size="18" font-weight="900" fill="#c9a962" text-anchor="middle" letter-spacing="-1">BM</text>
-                </g>
-            </svg>
+        <a href="#hero" class="nav-logo">
+            <img src="logo.svg" alt="Bold Mark Collective Logo">
             <div class="nav-logo-text">
                 <span class="name">Bold <span>Mark</span></span>
                 <span class="tagline">Collective</span>
@@ -1062,230 +1098,201 @@
         </a>
         <ul class="nav-links">
             <li><a href="#services">Services</a></li>
-            <li><a href="#work">Work</a></li>
+            <li><a href="#products">Products</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
         <a href="#contact" class="nav-cta">Get Started</a>
     </nav>
 
-    <!-- HERO -->
-    <section class="hero">
+    <!-- ── HERO ── -->
+    <section class="hero" id="hero">
         <div class="hero-ambient"></div>
         <div class="hero-content">
-            <svg class="hero-logo-mark" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Circular border with fleur-de-lis -->
-                <circle cx="200" cy="200" r="190" stroke="#c9a962" stroke-width="2.5" opacity="0.8"/>
-                <!-- Top fleur-de-lis -->
-                <g transform="translate(200, 35)">
-                    <path d="M 0 0 L -8 12 L -5 10 Q -8 8 -8 5 Q -8 2 -5 2 Q -2 2 0 0 Q 2 2 5 2 Q 8 2 8 5 Q 8 8 5 10 L 8 12 Z" fill="#c9a962"/>
-                </g>
-                <!-- BM letters -->
-                <text x="200" y="220" font-family="Playfair Display, serif" font-size="140" font-weight="900" fill="#c9a962" text-anchor="middle" letter-spacing="-4">BM</text>
-                <!-- Bottom fleur-de-lis -->
-                <g transform="translate(200, 365) rotate(180)">
-                    <path d="M 0 0 L -8 12 L -5 10 Q -8 8 -8 5 Q -8 2 -5 2 Q -2 2 0 0 Q 2 2 5 2 Q 8 2 8 5 Q 8 8 5 10 L 8 12 Z" fill="#c9a962"/>
-                </g>
-            </svg>
+            <div class="hero-rule">
+                <div class="hero-rule-line"></div>
+                <div class="hero-rule-diamond"></div>
+                <div class="hero-rule-line right"></div>
+            </div>
+            <img src="logo.svg" alt="Bold Mark Collective" class="hero-logo-mark">
             <span class="hero-eyebrow">Premium Brand Design</span>
-            <h1>Where <em>Bold</em><br>Brands Are<br>Born</h1>
-            <p class="hero-subtitle">Crafting distinctive identities for brands that dare to stand out</p>
+            <h1>Where <em>Bold</em> Brands Are <em>Born</em></h1>
+            <p class="hero-subtitle">Elevating your vision through strategic branding & creative excellence</p>
             <div class="hero-actions">
                 <a href="#contact" class="btn-primary">Start Your Journey</a>
                 <a href="#services" class="btn-ghost">Explore Services</a>
             </div>
         </div>
         <div class="scroll-cue">
-            <span>Scroll to discover</span>
+            <span>Scroll to Explore</span>
             <div class="scroll-cue-line"></div>
         </div>
     </section>
 
-    <!-- MARQUEE -->
+    <!-- ── MARQUEE ── -->
     <div class="marquee-strip">
         <div class="marquee-inner">
-            <span class="marquee-item">★ Bold Brands ★</span>
-            <span class="marquee-dot">•</span>
-            <span class="marquee-item">Premium Identities</span>
-            <span class="marquee-dot">•</span>
-            <span class="marquee-item">Bold Mark Collective</span>
-            <span class="marquee-dot">•</span>
-            <span class="marquee-item">Where Creativity Thrives</span>
-            <span class="marquee-dot">•</span>
-            <span class="marquee-item">★ Bold Brands ★</span>
-            <span class="marquee-dot">•</span>
-            <span class="marquee-item">Premium Identities</span>
-            <span class="marquee-dot">•</span>
-            <span class="marquee-item">Bold Mark Collective</span>
-            <span class="marquee-dot">•</span>
-            <span class="marquee-item">Where Creativity Thrives</span>
+            <div class="marquee-item">✦ Bold Thinking ✦ Strategic Vision ✦ Creative Excellence ✦ Brand Impact ✦</div>
+            <div class="marquee-item">✦ Bold Thinking ✦ Strategic Vision ✦ Creative Excellence ✦ Brand Impact ✦</div>
         </div>
     </div>
 
-    <!-- HEADER SECTION -->
+    <!-- ── HEADER SECTION ── -->
     <section class="header-section">
         <div class="header-content">
             <div class="header-logo-box">
-                <svg class="header-logo" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="150" cy="150" r="140" stroke="#c9a962" stroke-width="2" opacity="0.7"/>
-                    <text x="150" y="170" font-family="Playfair Display, serif" font-size="95" font-weight="900" fill="#c9a962" text-anchor="middle">BM</text>
-                </svg>
+                <img src="logo.svg" alt="Bold Mark Collective" class="header-logo">
             </div>
             <div class="header-text">
-                <h2>200+ Successful <span>Projects</span></h2>
-                <p>Global Brand Partnerships</p>
-                <p>Award-Winning Designs</p>
+                <h2>Introducing <span>Bold Mark Collective</span></h2>
+                <p>We are a full-service branding agency dedicated to crafting distinctive identities for ambitious brands. From concept to execution, we transform your vision into a compelling brand narrative that resonates with your audience.</p>
             </div>
         </div>
     </section>
 
-    <!-- SERVICES -->
-    <section id="services" class="services">
+    <!-- ── SERVICES ── -->
+    <section class="services" id="services">
         <div class="section-head">
-            <span class="section-eyebrow">Our Expertise</span>
-            <h2 class="section-title">Services</h2>
-            <p class="section-desc">We offer comprehensive branding solutions tailored to elevate your business</p>
+            <span class="section-eyebrow">What We Offer</span>
+            <h2 class="section-title">Our <span>Services</span></h2>
+            <p class="section-desc">Comprehensive branding solutions tailored to elevate your brand's presence in the market</p>
         </div>
         <div class="services-grid">
             <div class="service-card">
                 <span class="service-num">01</span>
-                <div class="service-icon-wrap">★</div>
+                <div class="service-icon-wrap">🎨</div>
                 <h3>Brand Strategy</h3>
-                <p>Develop compelling brand narratives and positioning strategies that resonate with your target audience.</p>
+                <p>Define your unique positioning and create a strategic roadmap for sustainable growth</p>
             </div>
             <div class="service-card">
                 <span class="service-num">02</span>
-                <div class="service-icon-wrap">◆</div>
+                <div class="service-icon-wrap">✨</div>
                 <h3>Visual Identity</h3>
-                <p>Create distinctive logos, color palettes, and design systems that define your brand essence.</p>
+                <p>Craft memorable logos, color palettes, and design systems that reflect your essence</p>
             </div>
             <div class="service-card">
                 <span class="service-num">03</span>
-                <div class="service-icon-wrap">●</div>
-                <h3>Digital Design</h3>
-                <p>Craft stunning digital experiences across web and app platforms that engage and convert.</p>
+                <div class="service-icon-wrap">📱</div>
+                <h3>Digital Experience</h3>
+                <p>Build engaging digital ecosystems that connect with your audience authentically</p>
             </div>
         </div>
     </section>
 
-    <!-- HIGHLIGHTS SECTION -->
+    <!-- ── HIGHLIGHTS ── -->
     <section class="highlights-section">
         <div class="highlights-content">
             <ul class="highlights-list">
-                <li>200+ Successful Projects</li>
-                <li>Global Brand Partnerships</li>
-                <li>Award-Winning Designs</li>
+                <li>10+ Years of Industry Excellence</li>
+                <li>500+ Brands Transformed Globally</li>
+                <li>Award-Winning Creative Team</li>
+                <li>Data-Driven Strategy Approach</li>
+                <li>Proven Results & ROI Focus</li>
             </ul>
             <div class="highlights-logo-box">
                 <div class="corner-accent tl"></div>
                 <div class="corner-accent tr"></div>
-                <svg class="highlights-logo" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="150" cy="150" r="140" stroke="#c9a962" stroke-width="2" opacity="0.7"/>
-                    <g opacity="0.9">
-                        <text x="150" y="170" font-family="Playfair Display, serif" font-size="90" font-weight="900" fill="#c9a962" text-anchor="middle">BM</text>
-                    </g>
-                </svg>
+                <img src="logo.svg" alt="Bold Mark Collective" class="highlights-logo">
                 <div class="corner-accent bl"></div>
                 <div class="corner-accent br"></div>
             </div>
         </div>
     </section>
 
-    <!-- PRODUCTS -->
-    <section id="work" class="products">
+    <!-- ── PRODUCTS ── -->
+    <section class="products" id="products">
         <div class="section-head">
-            <span class="section-eyebrow">Our Portfolio</span>
-            <h2 class="section-title">Featured Work</h2>
+            <span class="section-eyebrow">Case Studies</span>
+            <h2 class="section-title">Featured <span>Work</span></h2>
+            <p class="section-desc">Explore some of our most impactful brand transformations and creative campaigns</p>
         </div>
         <div class="products-grid">
             <div class="product-card">
-                <div class="product-bg">◆</div>
-                <div class="product-corner"></div>
+                <div class="product-bg">🌟</div>
                 <div class="product-info">
-                    <h4>Luxury Brand</h4>
-                    <p>Branding</p>
+                    <h4>Premium Luxury Brand</h4>
+                    <p>Branding Strategy</p>
                 </div>
+                <div class="product-corner"></div>
             </div>
             <div class="product-card">
-                <div class="product-bg">★</div>
-                <div class="product-corner"></div>
+                <div class="product-bg">💼</div>
                 <div class="product-info">
-                    <h4>Tech Startup</h4>
-                    <p>Visual Identity</p>
+                    <h4>Tech Startup Identity</h4>
+                    <p>Visual Design System</p>
                 </div>
+                <div class="product-corner"></div>
             </div>
             <div class="product-card">
-                <div class="product-bg">●</div>
-                <div class="product-corner"></div>
+                <div class="product-bg">🎯</div>
                 <div class="product-info">
-                    <h4>Fashion House</h4>
-                    <p>Rebranding</p>
+                    <h4>Lifestyle Brand Campaign</h4>
+                    <p>Digital Marketing</p>
                 </div>
+                <div class="product-corner"></div>
             </div>
             <div class="product-card">
-                <div class="product-bg">◆</div>
-                <div class="product-corner"></div>
+                <div class="product-bg">🚀</div>
                 <div class="product-info">
-                    <h4>Restaurant Chain</h4>
-                    <p>Brand Strategy</p>
+                    <h4>Global Expansion Project</h4>
+                    <p>International Branding</p>
                 </div>
+                <div class="product-corner"></div>
             </div>
         </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="about">
+    <!-- ── ABOUT ── -->
+    <section class="about" id="about">
         <div class="about-grid">
             <div class="about-content">
                 <span class="section-eyebrow">About Us</span>
-                <h2>Crafting <em>Bold</em> Identities Since 2015</h2>
-                <p>We are a collective of designers, strategists, and creative thinkers united by a passion for creating transformative brand experiences.</p>
-                <p>Our approach combines strategic thinking with exceptional design execution, ensuring every project delivers measurable impact.</p>
+                <h2>The <em>Bold</em> Story</h2>
+                <p>Founded on the principle that every brand has a bold story worth telling, Bold Mark Collective brings together world-class designers, strategists, and storytellers. We don't just create brands—we build movements.</p>
                 <ul class="about-list">
-                    <li>Industry-Leading Expertise</li>
-                    <li>Collaborative Process</li>
-                    <li>Proven Track Record</li>
+                    <li>Strategic Brand Positioning</li>
+                    <li>Creative Excellence & Innovation</li>
+                    <li>Collaborative Client Partnerships</li>
+                    <li>Results-Driven Approach</li>
                 </ul>
+                <a href="#contact" class="btn-primary">Work With Us</a>
             </div>
             <div class="about-visual">
                 <div class="corner-frame tl"></div>
                 <div class="corner-frame tr"></div>
-                <svg class="about-logo-large" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="150" cy="150" r="140" stroke="#c9a962" stroke-width="2.5" opacity="0.8"/>
-                    <text x="150" y="175" font-family="Playfair Display, serif" font-size="110" font-weight="900" fill="#c9a962" text-anchor="middle">BM</text>
-                </svg>
+                <img src="logo.svg" alt="Bold Mark Collective" class="about-logo-large">
                 <div class="corner-frame bl"></div>
                 <div class="corner-frame br"></div>
             </div>
         </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="contact">
+    <!-- ── CONTACT ── -->
+    <section class="contact" id="contact">
         <div class="contact-grid">
             <div class="contact-info">
                 <h2>Let's Create Something <em>Bold</em></h2>
-                <p>Ready to transform your brand? Get in touch with our team to discuss your project and explore how we can help you stand out.</p>
+                <p>Ready to elevate your brand? Get in touch with our team to discuss your vision and explore how Bold Mark Collective can transform your brand into a market leader.</p>
                 <div class="contact-items">
                     <div class="contact-item">
                         <div class="contact-item-icon">📍</div>
                         <div class="contact-item-text">
                             <label>Location</label>
-                            <p>Global Creative Studio</p>
+                            <p>New York, Los Angeles, London</p>
                         </div>
                     </div>
                     <div class="contact-item">
                         <div class="contact-item-icon">✉️</div>
                         <div class="contact-item-text">
                             <label>Email</label>
-                            <a href="mailto:hello@boldmark.com">hello@boldmark.com</a>
+                            <a href="mailto:hello@boldmarkcollective.com">hello@boldmarkcollective.com</a>
                         </div>
                     </div>
                     <div class="contact-item">
-                        <div class="contact-item-icon">☎️</div>
+                        <div class="contact-item-icon">📱</div>
                         <div class="contact-item-text">
                             <label>Phone</label>
-                            <p>+1 (555) 123-4567</p>
+                            <a href="tel:+1234567890">+1 (234) 567-890</a>
                         </div>
                     </div>
                 </div>
@@ -1293,60 +1300,61 @@
             <form class="contact-form">
                 <div class="form-row">
                     <div class="form-field">
-                        <label>Full Name</label>
-                        <input type="text" placeholder="Your name" required>
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-field">
-                        <label>Email</label>
-                        <input type="email" placeholder="your@email.com" required>
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" required>
                     </div>
                 </div>
                 <div class="form-field">
-                    <label>Project Type</label>
-                    <select required>
+                    <label for="company">Company Name</label>
+                    <input type="text" id="company" name="company">
+                </div>
+                <div class="form-field">
+                    <label for="service">Service Interested In</label>
+                    <select id="service" name="service">
                         <option>Select a service...</option>
                         <option>Brand Strategy</option>
                         <option>Visual Identity</option>
-                        <option>Digital Design</option>
+                        <option>Digital Experience</option>
                         <option>Other</option>
                     </select>
                 </div>
                 <div class="form-field">
-                    <label>Message</label>
-                    <textarea placeholder="Tell us about your project..." required></textarea>
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell us about your brand..."></textarea>
                 </div>
                 <button type="submit" class="form-submit">Send Message</button>
             </form>
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- ── FOOTER ── -->
     <footer>
         <div class="footer-top">
             <div class="footer-brand">
                 <div class="footer-brand-logo">
-                    <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="25" cy="25" r="24" stroke="#c9a962" stroke-width="1.5" opacity="0.6"/>
-                        <text x="25" y="32" font-family="Playfair Display, serif" font-size="22" font-weight="900" fill="#c9a962" text-anchor="middle">B</text>
-                    </svg>
+                    <img src="logo.svg" alt="Bold Mark Collective">
                 </div>
-                <div class="footer-brand-name">Bold <span>Mark</span></div>
-                <p>Crafting distinctive identities for brands that dare to stand out in a crowded marketplace.</p>
-                <div class="footer-brand-tagline">Where Bold Brands Are Born</div>
+                <div class="footer-brand-name">Bold <span>Mark</span> Collective</div>
+                <p>Transforming brands into bold market leaders through strategic design and creative excellence.</p>
+                <p class="footer-brand-tagline">Where Bold Brands Are Born</p>
             </div>
             <div class="footer-col">
                 <h4>Services</h4>
                 <ul>
                     <li><a href="#services">Brand Strategy</a></li>
                     <li><a href="#services">Visual Identity</a></li>
-                    <li><a href="#services">Digital Design</a></li>
+                    <li><a href="#services">Digital Experience</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Company</h4>
                 <ul>
                     <li><a href="#about">About Us</a></li>
-                    <li><a href="#work">Portfolio</a></li>
+                    <li><a href="#products">Our Work</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
@@ -1360,42 +1368,9 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 Bold Mark Collective. All rights reserved.</p>
-            <p>Designed & Developed with Excellence</p>
+            <p>&copy; 2024 Bold Mark Collective. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
         </div>
     </footer>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const href = this.getAttribute('href');
-                if (href !== '#') {
-                    e.preventDefault();
-                    const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                }
-            });
-        });
-
-        // Nav scroll effect
-        let navElement = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navElement.classList.add('scrolled');
-            } else {
-                navElement.classList.remove('scrolled');
-            }
-        });
-
-        // Form submission
-        document.querySelector('.contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            e.target.reset();
-        });
-    </script>
 </body>
 </html>
