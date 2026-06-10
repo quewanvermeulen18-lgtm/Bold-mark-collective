@@ -1,0 +1,45 @@
+<svg viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg">
+  <!-- Black background -->
+  <rect width="560" height="560" fill="#000000"/>
+  
+  <!-- Outer circle with decorative border -->
+  <circle cx="280" cy="200" r="140" fill="none" stroke="#c9a962" stroke-width="3"/>
+  
+  <!-- Inner double circle -->
+  <circle cx="280" cy="200" r="135" fill="none" stroke="#8b7d5f" stroke-width="1.5"/>
+  
+  <!-- Decorative fleur-de-lis top -->
+  <g transform="translate(280, 80)">
+    <!-- Center petal -->
+    <path d="M 0 0 Q 5 10 0 15 Q -5 10 0 0" fill="#c9a962"/>
+    <!-- Left petal -->
+    <path d="M -8 8 Q -12 12 -10 18 Q -6 14 -8 8" fill="#c9a962"/>
+    <!-- Right petal -->
+    <path d="M 8 8 Q 12 12 10 18 Q 6 14 8 8" fill="#c9a962"/>
+  </g>
+  
+  <!-- Decorative fleur-de-lis bottom -->
+  <g transform="translate(280, 320) rotate(180)">
+    <!-- Center petal -->
+    <path d="M 0 0 Q 5 10 0 15 Q -5 10 0 0" fill="#c9a962"/>
+    <!-- Left petal -->
+    <path d="M -8 8 Q -12 12 -10 18 Q -6 14 -8 8" fill="#c9a962"/>
+    <!-- Right petal -->
+    <path d="M 8 8 Q 12 12 10 18 Q 6 14 8 8" fill="#c9a962"/>
+  </g>
+  
+  <!-- "BMC" Text -->
+  <text x="280" y="215" font-family="'Playfair Display', serif" font-size="90" font-weight="900" fill="#c9a962" text-anchor="middle" letter-spacing="-2">BMC</text>
+  
+  <!-- "BOLD MARK" text -->
+  <text x="280" y="400" font-family="'Cormorant Garamond', serif" font-size="32" font-weight="500" fill="#c9a962" text-anchor="middle" letter-spacing="4">BOLD MARK</text>
+  
+  <!-- Decorative line -->
+  <line x1="180" y1="420" x2="380" y2="420" stroke="#c9a962" stroke-width="1.5"/>
+  
+  <!-- "COLLECTIVE" text -->
+  <text x="280" y="450" font-family="'Cormorant Garamond', serif" font-size="20" font-weight="400" fill="#c9a962" text-anchor="middle" letter-spacing="3">COLLECTIVE</text>
+  
+  <!-- "WHERE BOLD BRANDS ARE BORN" tagline -->
+  <text x="280" y="480" font-family="'Cormorant Garamond', serif" font-size="14" font-weight="300" fill="#c9a962" text-anchor="middle" letter-spacing="2" font-style="italic">WHERE BOLD BRANDS ARE BORN</text>
+</svg>
