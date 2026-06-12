@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogs | Bold Mark Collective</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #C9A96E;
+            --gold-light: #E0C99A;
+            --gold-dark: #A68B4B;
+            --grey-100: #0F0F0F;
+            --grey-150: #141414;
+            --grey-200: #1A1A1A;
+            --grey-300: #2A2A2A;
+            --grey-400: #3A3A3A;
+            --grey-500: #555555;
+            --grey-600: #777777;
+            --grey-700: #999999;
+            --grey-800: #B0B0B0;
+            --grey-900: #CCCCCC;
+            --white: #E5E5E5;
+            --black: #0A0A0A;
+            --card-bg: #161616;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--grey-100);
+            color: var(--grey-700);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* ===================== NAVIGATION ===================== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--gold-dark);
+            transition: all 0.4s ease;
+        }
+        nav.scrolled {
+            padding: 0.8rem 5%;
+            background: rgba(10, 10, 10, 0.98);
+            box-shadow: 0 4px 30px rgba(201, 169, 110, 0.08);
+        }
+        .nav-logo {
+            height: 48px;
+            background: var(--black);
+            padding: 5px 10px;
+            border-radius: 8px;
+            border: 1px solid var(--gold-dark);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .nav-logo:hover { transform: scale(1.05) rotateY(10deg); }
+        .nav-logo img { height: 100%; width: auto; display: block; }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--grey-600);
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-links a.active { color: var(--gold); }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            background: transparent;
+            border: 1px solid var(--gold-dark);
+            border-radius: 6px;
+            padding: 6px;
+            gap: 5px;
+            transition: all 0.3s ease;
+            z-index: 1100;
+        }
+        .hamburger:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(201, 169, 110, 0.15);
+        }
+        .hamburger span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 1px;
+            transition: all 0.3s ease;
+            transform-origin: center;
+        }
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(30px);
+            border-left: 1px solid var(--gold-dark);
+            padding: 6rem 2rem 2rem;
+            transition: right 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 1050;
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .mobile-menu.active { right: 0; }
+        .mobile-menu a {
+            color: var(--grey-600);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(201, 169, 110, 0.1);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .mobile-menu a::before {
+            content: '';
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+        .mobile-menu a:hover {
+            color: var(--gold);
+            padding-left: 0.5rem;
+        }
+        .mobile-menu a:hover::before { width: 20px; }
+        .mobile-menu a.active { color: var(--gold); }
+        .mobile-menu a.active::before { width: 20px; }
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1040;
+        }
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===================== PAGE HEADER ===================== */
+        .page-header {
+            min-height: 45vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 8rem 2rem 3rem;
+            overflow: hidden;
+            background: var(--black);
+            text-align: center;
+        }
+        .page-header-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.04;
+            background-image: radial-gradient(circle at 25% 25%, var(--gold) 1px, transparent 1px),
+                              radial-gradient(circle at 75% 75%, var(--gold) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        .page-header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.02em;
+        }
+        .page-header h1 span { color: var(--gold); font-style: italic; }
+        .page-header p {
+            font-size: 1.05rem;
+            color: var(--grey-600);
+            max-width: 550px;
+            font-weight: 300;
+        }
+
+        /* ===================== CATALOG GRID ===================== */
+        .catalog-section {
+            padding: 4rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .catalog-filters {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        .filter-btn {
+            padding: 0.7rem 1.8rem;
+            background: transparent;
+            border: 1px solid var(--gold-dark);
+            border-radius: 100px;
+            color: var(--grey-600);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--black);
+        }
+        .catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .catalog-item {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--gold-dark);
+            background: var(--card-bg);
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            aspect-ratio: 1;
+        }
+        .catalog-item:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(201, 169, 110, 0.1);
+        }
+        .catalog-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+        .catalog-item:hover img {
+            transform: scale(1.08);
+        }
+        .catalog-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .catalog-item:hover .catalog-item-overlay {
+            opacity: 1;
+        }
+        .catalog-item-overlay h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--white);
+            margin-bottom: 0.3rem;
+        }
+        .catalog-item-overlay p {
+            font-size: 0.8rem;
+            color: var(--grey-600);
+        }
+        .catalog-item-overlay .category-tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.4rem 1rem;
+            background: var(--gold);
+            color: var(--black);
+            font-size: 0.7rem;
+            font-weight: 600;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            backdrop-filter: blur(20px);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 12px;
+            border: 1px solid var(--gold-dark);
+            box-shadow: 0 0 60px rgba(201, 169, 110, 0.15);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 48px;
+            height: 48px;
+            background: transparent;
+            border: 1px solid var(--gold-dark);
+            border-radius: 50%;
+            color: var(--gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .lightbox-close:hover {
+            border-color: var(--gold);
+            transform: rotate(90deg);
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(201, 169, 110, 0.1);
+            border: 1px solid var(--gold-dark);
+            border-radius: 50%;
+            color: var(--gold);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .lightbox-nav:hover {
+            background: var(--gold);
+            color: var(--black);
+        }
+        .lightbox-prev { left: 2rem; }
+        .lightbox-next { right: 2rem; }
+
+        /* ===================== FOOTER ===================== */
+        footer {
+            background: var(--black);
+            color: white;
+            padding: 4rem 5% 2rem;
+            margin-top: 4rem;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid var(--gold-dark);
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .footer-logo {
+            background: var(--black);
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            border: 2px solid var(--gold);
+            margin-bottom: 1.2rem;
+            transition: transform 0.4s ease;
+            box-shadow: 0 0 15px rgba(201, 169, 110, 0.08);
+        }
+        .footer-logo:hover { transform: scale(1.05) rotateY(10deg); }
+        .footer-logo img { height: 60px; width: auto; display: block; }
+        .footer-brand p {
+            color: var(--grey-600);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        .footer-section h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+        .footer-section a, .footer-section p {
+            color: var(--grey-600);
+            text-decoration: none;
+            display: block;
+            padding: 0.4rem 0;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+        .footer-section a:hover { color: var(--gold); }
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(201, 169, 110, 0.08);
+            text-align: center;
+            color: var(--grey-600);
+            font-size: 0.8rem;
+        }
+
+        /* ===================== SCROLL REVEAL ===================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(35px) rotateX(8deg);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+
+        /* ===================== MOBILE ===================== */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .catalog-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
+            .footer-content { grid-template-columns: 1fr; gap: 2rem; }
+            .lightbox-nav { display: none; }
+            section { padding: 3rem 5%; }
+        }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--grey-100); }
+        ::-webkit-scrollbar-thumb { background: var(--grey-400); border-radius: 3px; border: 1px solid var(--gold-dark); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+    </style>
+</head>
+<body>
+
+    <!-- ===================== NAVIGATION ===================== -->
+    <nav id="navbar">
+        <div class="nav-logo">
+            <img src="IMG-20260610-WA0002.jpg" alt="Bold Mark Collective Logo">
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="catalogs.html" class="active">Catalogs</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#quote-form">Contact</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+    <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="catalogs.html" class="active">Catalogs</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#quote-form">Contact</a>
+        <a href="index.html#quote-form">Get a Quote</a>
+    </div>
+
+    <!-- ===================== PAGE HEADER ===================== -->
+    <section class="page-header">
+        <div class="page-header-bg"></div>
+        <h1>Our <span>Catalogs</span></h1>
+        <p>Browse our collection of premium branded products, corporate gifts, and promotional materials.</p>
+    </section>
+
+    <!-- ===================== CATALOG GALLERY ===================== -->
+    <section class="catalog-section">
+        <div class="catalog-filters">
+            <button class="filter-btn active" onclick="filterCatalog('all')">All</button>
+            <button class="filter-btn" onclick="filterCatalog('corporate')">Corporate Gifts</button>
+            <button class="filter-btn" onclick="filterCatalog('apparel')">Apparel</button>
+            <button class="filter-btn" onclick="filterCatalog('printing')">Printing</button>
+            <button class="filter-btn" onclick="filterCatalog('events')">Event Branding</button>
+        </div>
+
+        <div class="catalog-grid" id="catalogGrid">
+            <!-- Add your images here. Format: -->
+            <!-- <div class="catalog-item" data-category="corporate" onclick="openLightbox(0)">
+                <img src="catalogs/your-image.jpg" alt="Product Name">
+                <div class="catalog-item-overlay">
+                    <span class="category-tag">Corporate</span>
+                    <h3>Product Name</h3>
+                    <p>Short description</p>
+                </div>
+            </div> -->
+            
+            <!-- EXAMPLE ITEMS - Replace with your actual images -->
+            <div class="catalog-item" data-category="corporate" onclick="openLightbox(0)">
+                <img src="catalogs/placeholder1.jpg" alt="Branded Mug Set">
+                <div class="catalog-item-overlay">
+                    <span class="category-tag">Corporate</span>
+                    <h3>Branded Mug Set</h3>
+                    <p>Premium ceramic mugs with custom logo</p>
+                </div>
+            </div>
+            <div class="catalog-item" data-category="apparel" onclick="openLightbox(1)">
+                <img src="catalogs/placeholder2.jpg" alt="Corporate Polo">
+                <div class="catalog-item-overlay">
+                    <span class="category-tag">Apparel</span>
+                    <h3>Corporate Polo Shirt</h3>
+                    <p>High-quality embroidered polos</p>
+                </div>
+            </div>
+            <div class="catalog-item" data-category="printing" onclick="openLightbox(2)">
+                <img src="catalogs/placeholder3.jpg" alt="Business Cards">
+                <div class="catalog-item-overlay">
+                    <span class="category-tag">Printing</span>
+                    <h3>Business Cards</h3>
+                    <p>Luxury finish business cards</p>
+                </div>
+            </div>
+            <div class="catalog-item" data-category="events" onclick="openLightbox(3)">
+                <img src="catalogs/placeholder4.jpg" alt="Event Banner">
+                <div class="catalog-item-overlay">
+                    <span class="category-tag">Events</span>
+                    <h3>Roll-Up Banner</h3>
+                    <p>Portable display solutions</p>
+                </div>
+            </div>
+            <div class="catalog-item" data-category="corporate" onclick="openLightbox(4)">
+                <img src="catalogs/placeholder5.jpg" alt="USB Drive">
+                <div class="catalog-item-overlay">
+                    <span class="category-tag">Corporate</span>
+                    <h3>Branded USB Drive</h3>
+                    <p>Custom engraved tech accessories</p>
+                </div>
+            </div>
+            <div class="catalog-item" data-category="apparel" onclick="openLightbox(5)">
+                <img src="catalogs/placeholder6.jpg" alt="Safety Vest">
+                <div class="catalog-item-overlay">
+                    <span class="category-tag">Apparel</span>
+                    <h3>Branded Safety Vest</h3>
+                    <p>High-visibility workwear</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================== LIGHTBOX ===================== -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <button class="lightbox-nav lightbox-prev" onclick="changeImage(-1)">&#10094;</button>
+        <button class="lightbox-nav lightbox-next" onclick="changeImage(1)">&#10095;</button>
+        <img src="" alt="Catalog Preview" id="lightboxImg">
+    </div>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="footer-logo">
+                    <img src="IMG-20260610-WA0002.jpg" alt="Bold Mark Collective Logo">
+                </div>
+                <p>"Where Bold Brands Are Born"</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p><strong style="color: var(--grey-800);">Bold Mark Collective</strong></p>
+                <p>South Africa</p>
+                <a href="mailto:info@bmc.co.za">info@bmc.co.za</a>
+                <a href="tel:+27769726038">+27 76 972 6038</a>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="catalogs.html">Catalogs</a>
+                <a href="signup.html">Sign Up</a>
+                <a href="index.html#services">Services</a>
+                <a href="index.html#quote-form">Get a Quote</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Bold Mark Collective. All rights reserved. — Where Bold Brands Are Born</p>
+        </div>
+    </footer>
+
+    <script>
+        // Catalog data - Add your images here
+        const catalogImages = [
+            { src: 'catalogs/placeholder1.jpg', title: 'Branded Mug Set', category: 'corporate' },
+            { src: 'catalogs/placeholder2.jpg', title: 'Corporate Polo Shirt', category: 'apparel' },
+            { src: 'catalogs/placeholder3.jpg', title: 'Business Cards', category: 'printing' },
+            { src: 'catalogs/placeholder4.jpg', title: 'Roll-Up Banner', category: 'events' },
+            { src: 'catalogs/placeholder5.jpg', title: 'Branded USB Drive', category: 'corporate' },
+            { src: 'catalogs/placeholder6.jpg', title: 'Branded Safety Vest', category: 'apparel' }
+        ];
+
+        let currentImageIndex = 0;
+
+        function filterCatalog(category) {
+            const items = document.querySelectorAll('.catalog-item');
+            const buttons = document.querySelectorAll('.filter-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                    setTimeout(() => item.style.opacity = '1', 10);
+                } else {
+                    item.style.opacity = '0';
+                    setTimeout(() => item.style.display = 'none', 300);
+                }
+            });
+        }
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightboxImg');
+            img.src = catalogImages[index].src;
+            img.alt = catalogImages[index].title;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function changeImage(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex < 0) currentImageIndex = catalogImages.length - 1;
+            if (currentImageIndex >= catalogImages.length) currentImageIndex = 0;
+            
+            const img = document.getElementById('lightboxImg');
+            img.style.opacity = '0';
+            setTimeout(() => {
+                img.src = catalogImages[currentImageIndex].src;
+                img.alt = catalogImages[currentImageIndex].title;
+                img.style.opacity = '1';
+            }, 200);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') changeImage(-1);
+            if (e.key === 'ArrowRight') changeImage(1);
+        });
+
+        // Menu logic
+        function toggleMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('menuOverlay');
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => { toggleMenu(); });
+        });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+
+</body>
+</html>
